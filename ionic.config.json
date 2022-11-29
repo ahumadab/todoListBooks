@@ -1,0 +1,7 @@
+{
+  "name": "todoListBooks",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
