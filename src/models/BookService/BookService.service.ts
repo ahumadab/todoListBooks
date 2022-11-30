@@ -13,6 +13,16 @@ export class BookService implements IBookService {
   constructor() {
     this._bookRepository = new Preference();
   }
+  public async delete(book: IBook): Promise<void> {
+    const books = await this._bookRepository.getAll();
+    const bookIndex = books.findIndex(
+      (bookInRepo) => bookInRepo.id === book.id
+    );
+    if (bookIndex !== -1) {
+      books.splice(bookIndex, 1);
+      this._bookRepository.update(books);
+    }
+  }
 
   public async switchRead(book: IBook): Promise<void> {
     const books = await this._bookRepository.getAll();

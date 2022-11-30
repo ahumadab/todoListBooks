@@ -13,6 +13,7 @@ export interface IuseBookService {
   saveBook: (book: IBook) => Promise<void>;
   switchFavorite: (book: IBook) => Promise<void>;
   switchRead: (book: IBook) => Promise<void>;
+  deleteBook: (book: IBook) => Promise<void>;
 }
 
 const useBookService = (): IuseBookService => {
@@ -31,6 +32,17 @@ const useBookService = (): IuseBookService => {
   const saveBook = async (book: IBook) => {
     await bookService.saveBook(book);
     setBooksState([...books, book]);
+  };
+
+  const deleteBook = async (book: IBook) => {
+    const bookIndex: number = books.findIndex(
+      (bookInState) => bookInState.id === book.id
+    );
+    if (bookIndex !== -1) {
+      await bookService.delete(book);
+      books.splice(bookIndex, 1);
+      setBooksState([...books]);
+    }
   };
 
   const switchFavorite = async (book: IBook) => {
@@ -59,6 +71,7 @@ const useBookService = (): IuseBookService => {
     saveBook,
     switchFavorite,
     switchRead,
+    deleteBook,
   };
 };
 

@@ -10,4 +10,5 @@ export interface IBookService {
   getAll(): Promise<IBook[]>;
   switchFavorite(book: IBook): Promise<void>;
   switchRead(book: IBook): Promise<void>;
+  delete(book: IBook): Promise<void>;
 }

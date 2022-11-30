@@ -8,4 +8,5 @@ export const BookServiceContext: React.Context<IuseBookService> =
     saveBook: async () => {},
     switchFavorite: async (book) => {},
     switchRead: async (book) => {},
+    deleteBook: async (book) => {},
   });
