@@ -21,7 +21,7 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
     resetForm,
   } = useCreateBookForm();
   const { saveBook } = useContext(BookServiceContext);
-  const [present] = useIonToast();
+  const [createToast] = useIonToast();
 
   const titleHandler: (event: IonInputCustomEvent<InputEvent>) => void = (
     event
@@ -52,7 +52,7 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
   };
 
   const showConfirmCreateBook = () => {
-    present({
+    createToast({
       message: "New Book created !",
       duration: 1500,
       position: "bottom",
