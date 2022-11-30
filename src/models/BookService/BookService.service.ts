@@ -13,6 +13,16 @@ export class BookService implements IBookService {
   constructor() {
     this._bookRepository = new Preference();
   }
+
+  public async switchRead(book: IBook): Promise<void> {
+    const books = await this._bookRepository.getAll();
+    const bookFound = books.find((bookInRepo) => bookInRepo.id === book.id);
+    if (bookFound) {
+      bookFound.readDate = book.readDate;
+      this._bookRepository.update(books);
+    }
+  }
+
   public async switchFavorite(book: IBook): Promise<void> {
     const books = await this._bookRepository.getAll();
     const bookFound = books.find((bookInRepo) => bookInRepo.id === book.id);

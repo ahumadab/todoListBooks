@@ -1,9 +1,9 @@
-import { IonIcon, IonItem, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
-import { book as bookIcon, bookOutline } from 'ionicons/icons';
+import { IonItem, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
 import React, { useContext } from 'react';
 
 import { BookServiceContext } from '../../../contexts';
 import { FavoriteButton, IsFavoriteIcon } from '../../FavoriteBooks';
+import { ReadBookButton } from '../../ReadBook';
 
 const Books: React.FC = () => {
   const { books } = useContext(BookServiceContext);
@@ -15,7 +15,7 @@ const Books: React.FC = () => {
           <IonItem>
             <IonLabel>{book.title}</IonLabel>
             <IsFavoriteIcon book={book} />
-            <IonIcon icon={book.readDate ? bookIcon : bookOutline} slot="end" />
+            <ReadBookButton book={book} />
           </IonItem>
           <IonItemOptions>
             <FavoriteButton book={book} />

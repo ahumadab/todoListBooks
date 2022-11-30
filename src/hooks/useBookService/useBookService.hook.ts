@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IBook } from '../../models/Book';
-import { IBookService } from '../../models/BookService';
-import { BookService } from '../../models/BookService/BookService.service';
+import { BookService, IBookService } from '../../models/BookService';
 
 /**
  *
@@ -13,6 +12,7 @@ export interface IuseBookService {
   books: IBook[];
   saveBook: (book: IBook) => Promise<void>;
   switchFavorite: (book: IBook) => Promise<void>;
+  switchRead: (book: IBook) => Promise<void>;
 }
 
 const useBookService = (): IuseBookService => {
@@ -44,10 +44,21 @@ const useBookService = (): IuseBookService => {
     setBooksState(newBooks);
   };
 
+  const switchRead = async (book: IBook) => {
+    if (book.readDate) {
+      book.readDate = undefined;
+    } else {
+      book.readDate = new Date();
+    }
+    await bookService.switchRead(book);
+    setBooksState([...books]);
+  };
+
   return {
     books,
     saveBook,
     switchFavorite,
+    switchRead,
   };
 };
 
