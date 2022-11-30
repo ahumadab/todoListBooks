@@ -1,3 +1,4 @@
+import { Share } from '@capacitor/share';
 import { useIonActionSheet, useIonAlert } from '@ionic/react';
 import { arrowBackOutline, pencilOutline, shareSocialOutline, trashOutline } from 'ionicons/icons';
 import { useContext } from 'react';
@@ -32,9 +33,25 @@ const useBookOptions = () => {
   const update = () => {
     console.log("update");
   };
-  const share = () => {
-    console.log("share");
+
+  const share = async (book: IBook) => {
+    const hasRead = book.readDate;
+    let text: string;
+    if (hasRead) {
+      text = `I have read this Book ${book.title} by ${book.author}.`;
+      if (book.isFavorite) {
+        text += "\nAnd it's my favorite !";
+      }
+    } else {
+      text = `I'm gonna read this Book ${book.title} by ${book.author}.`;
+    }
+    await Share.share({
+      title: "Look at me! I can read !",
+      text: text,
+      dialogTitle: "Share with buddies",
+    });
   };
+
   const openOptionActionSheet = (book: IBook) => {
     createActionSheet({
       header: "Parameters",
@@ -63,7 +80,7 @@ const useBookOptions = () => {
             action: "share",
           },
           icon: shareSocialOutline,
-          handler: share,
+          handler: () => share(book),
         },
         {
           text: "Cancel",
