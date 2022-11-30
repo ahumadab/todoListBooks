@@ -4,20 +4,17 @@ import React from 'react';
 import { Header } from '../../components/Header';
 import { Menu } from '../../components/Menu';
 import { CreateBookForm } from '../../features/CreateBook';
-import { CreateBookProvider } from '../../features/CreateBook/contexts';
 
 const Create: React.FC = () => {
   return (
     <>
       <Menu menuLabel="Create" />
-      <CreateBookProvider>
-        <IonPage id="main-content">
-          <Header titleLabel="Create" />
-          <IonContent className="ion-padding">
-            <CreateBookForm />
-          </IonContent>
-        </IonPage>
-      </CreateBookProvider>
+      <IonPage id="main-content">
+        <Header titleLabel="Create" />
+        <IonContent className="ion-padding">
+          <CreateBookForm />
+        </IonContent>
+      </IonPage>
     </>
   );
 };

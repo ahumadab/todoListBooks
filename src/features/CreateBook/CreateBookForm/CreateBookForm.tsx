@@ -2,7 +2,7 @@ import { IonInputCustomEvent } from '@ionic/core';
 import { IonButton, IonInput, IonItem, IonLabel, IonList, IonNote, IonText, useIonToast } from '@ionic/react';
 import React, { useContext } from 'react';
 
-import { CreateBookContext } from '../contexts';
+import { BookServiceContext } from '../../../contexts/BookService.context';
 import { useCreateBookForm } from '../hooks';
 import styles from './CreateBookForm.module.sass';
 
@@ -19,7 +19,7 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
     isTitleError,
     resetForm,
   } = useCreateBookForm();
-  const { saveBook } = useContext(CreateBookContext);
+  const { saveBook } = useContext(BookServiceContext);
   const [present] = useIonToast();
 
   const titleHandler: (event: IonInputCustomEvent<InputEvent>) => void = (
@@ -36,10 +36,10 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
       setAuthor(event.target.value);
     }
   };
-  const validateHandler = () => {
+  const validateHandler = async () => {
     if (isFormValid()) {
       resetForm();
-      saveBook({ author, title });
+      await saveBook({ author, title });
       showConfirmCreateBook();
     }
   };

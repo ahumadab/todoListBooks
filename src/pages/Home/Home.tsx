@@ -18,13 +18,7 @@ const Home: React.FC = () => {
           </IonText>
           <CreateBookButton />
           <IonList>
-            <Books
-              books={[
-                { author: "", title: "aze" },
-                { author: "", title: "qsd" },
-                { author: "", title: "wxc" },
-              ]}
-            />
+            <Books />
           </IonList>
         </IonContent>
       </IonPage>
