@@ -1,4 +1,4 @@
-import { Book } from '../Book';
+import { IBook } from '../Book';
 
 /**
  *
@@ -6,6 +6,7 @@ import { Book } from '../Book';
  * @interface IBookService
  */
 export interface IBookService {
-  saveBook(book: Book): Promise<void>;
-  getAll(): Promise<Book[]>;
+  saveBook(book: IBook): Promise<void>;
+  getAll(): Promise<IBook[]>;
+  addToFavorite(book: IBook): Promise<void>;
 }

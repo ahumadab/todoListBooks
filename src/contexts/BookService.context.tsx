@@ -6,4 +6,5 @@ export const BookServiceContext: React.Context<IuseBookService> =
   createContext<IuseBookService>({
     books: [],
     saveBook: async () => {},
+    addToFavorite: async (book) => {},
   });

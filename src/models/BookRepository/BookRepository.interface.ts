@@ -1,4 +1,4 @@
-import { Book } from '../Book/Book.interface';
+import { IBook } from '../Book';
 
 /**
  *
@@ -6,6 +6,7 @@ import { Book } from '../Book/Book.interface';
  * @interface BookRepository
  */
 export interface BookRepository {
-  getAll(): Promise<Book[]>;
-  addOne(book: Book): Promise<void>;
+  getAll(): Promise<IBook[]>;
+  addOne(book: IBook): Promise<void>;
+  update(books: IBook[]): Promise<void>;
 }

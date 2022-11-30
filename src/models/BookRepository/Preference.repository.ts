@@ -1,7 +1,7 @@
 import { Preferences } from '@capacitor/preferences';
 
 import { PreferencesKeys } from '../../constants';
-import { Book } from '../Book';
+import { IBook } from '../Book';
 import { BookRepository } from './BookRepository.interface';
 
 /**
@@ -10,21 +10,25 @@ import { BookRepository } from './BookRepository.interface';
  * @classdesc
  */
 export class Preference implements BookRepository {
-  public async getAll(): Promise<Book[]> {
-    let books: Book[] = [];
-    const { value } = await Preferences.get({ key: PreferencesKeys.ALL_BOOK });
-    if (value) {
-      books = JSON.parse(value) as Book[];
-    }
-
-    return books;
-  }
-  public async addOne(book: Book): Promise<void> {
-    const oldBooks = await this.getAll();
-    const newBooks = [...oldBooks, book];
+  public async update(books: IBook[]): Promise<void> {
     await Preferences.set({
       key: PreferencesKeys.ALL_BOOK,
-      value: JSON.stringify(newBooks),
+      value: JSON.stringify(books),
     });
+  }
+
+  public async getAll(): Promise<IBook[]> {
+    let books: IBook[] = [];
+    const { value } = await Preferences.get({ key: PreferencesKeys.ALL_BOOK });
+    if (value) {
+      books = JSON.parse(value) as IBook[];
+    }
+    return books;
+  }
+
+  public async addOne(book: IBook): Promise<void> {
+    const oldBooks = await this.getAll();
+    const newBooks = [...oldBooks, book];
+    await this.update(newBooks);
   }
 }

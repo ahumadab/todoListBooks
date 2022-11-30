@@ -1,3 +1,3 @@
-import { Book } from './Book.interface';
+import { IBook } from './Book.interface';
 
-export type { Book };
+export type { IBook };

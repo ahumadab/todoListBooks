@@ -1,4 +1,4 @@
-import { Book } from '../Book';
+import { IBook } from '../Book';
 import { BookRepository, Preference } from '../BookRepository';
 import { IBookService } from './IBookService.interface';
 
@@ -13,11 +13,20 @@ export class BookService implements IBookService {
   constructor() {
     this._bookRepository = new Preference();
   }
-  public async saveBook(book: Book): Promise<void> {
+  public async addToFavorite(book: IBook): Promise<void> {
+    const books = await this._bookRepository.getAll();
+    const bookFound = books.find((bookInRepo) => bookInRepo.id === book.id);
+    if (bookFound) {
+      bookFound.isFavorite = true;
+      this._bookRepository.update(books);
+    }
+  }
+
+  public async saveBook(book: IBook): Promise<void> {
     this._bookRepository.addOne(book);
   }
 
-  public async getAll(): Promise<Book[]> {
+  public async getAll(): Promise<IBook[]> {
     return this._bookRepository.getAll();
   }
 }

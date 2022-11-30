@@ -1,6 +1,7 @@
 import { IonInputCustomEvent } from '@ionic/core';
 import { IonButton, IonInput, IonItem, IonLabel, IonList, IonNote, IonText, useIonToast } from '@ionic/react';
 import React, { useContext } from 'react';
+import uniqid from 'uniqid';
 
 import { BookServiceContext } from '../../../contexts/BookService.context';
 import { useCreateBookForm } from '../hooks';
@@ -39,7 +40,12 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
   const validateHandler = async () => {
     if (isFormValid()) {
       resetForm();
-      await saveBook({ author, title });
+      await saveBook({
+        id: uniqid(),
+        author,
+        title,
+        addingDate: new Date(),
+      });
       showConfirmCreateBook();
     }
   };
