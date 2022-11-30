@@ -20,7 +20,7 @@ const useBookService = (): IuseBookService => {
 
   useEffect(() => {
     getBooks();
-  }, []);
+  });
   const getBooks = async () => {
     const books = await bookService.getAll();
     setBooksState(books);
