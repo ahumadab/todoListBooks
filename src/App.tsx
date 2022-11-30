@@ -16,6 +16,7 @@ import { Redirect, Route } from 'react-router-dom';
 
 import { BookServiceProvider } from './contexts';
 import { Create } from './pages/Create';
+import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
@@ -34,6 +35,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/create">
             <Create />
+          </Route>
+          <Route exact path="/favorites">
+            <Favorites />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />

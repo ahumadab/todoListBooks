@@ -12,7 +12,7 @@ import { BookService } from '../../models/BookService/BookService.service';
 export interface IuseBookService {
   books: IBook[];
   saveBook: (book: IBook) => Promise<void>;
-  addToFavorite: (book: IBook) => Promise<void>;
+  switchFavorite: (book: IBook) => Promise<void>;
 }
 
 const useBookService = (): IuseBookService => {
@@ -33,11 +33,11 @@ const useBookService = (): IuseBookService => {
     setBooksState([...books, book]);
   };
 
-  const addToFavorite = async (book: IBook) => {
-    await bookService.addToFavorite(book);
+  const switchFavorite = async (book: IBook) => {
+    await bookService.switchFavorite(book);
     const newBooks = books.map((bookInState) => {
       if (bookInState.id === book.id) {
-        bookInState.isFavorite = true;
+        bookInState.isFavorite = !book.isFavorite;
       }
       return bookInState;
     });
@@ -47,7 +47,7 @@ const useBookService = (): IuseBookService => {
   return {
     books,
     saveBook,
-    addToFavorite,
+    switchFavorite,
   };
 };
 

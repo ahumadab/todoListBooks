@@ -45,6 +45,7 @@ const CreateBookForm: React.FC<CreateBookFormProps> = () => {
         author,
         title,
         addingDate: new Date(),
+        isFavorite: false,
       });
       showConfirmCreateBook();
     }

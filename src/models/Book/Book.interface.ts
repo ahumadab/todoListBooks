@@ -8,6 +8,6 @@ export interface IBook {
   title: string;
   author: string;
   addingDate: Date;
+  isFavorite: boolean;
   readDate?: Date;
-  isFavorite?: boolean;
 }

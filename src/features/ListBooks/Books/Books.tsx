@@ -1,11 +1,12 @@
-import { IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
-import { book as bookIcon, bookOutline, star } from 'ionicons/icons';
+import { IonIcon, IonItem, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
+import { book as bookIcon, bookOutline } from 'ionicons/icons';
 import React, { useContext } from 'react';
 
 import { BookServiceContext } from '../../../contexts';
+import { FavoriteButton, IsFavoriteIcon } from '../../FavoriteBooks';
 
 const Books: React.FC = () => {
-  const { books, addToFavorite } = useContext(BookServiceContext);
+  const { books } = useContext(BookServiceContext);
 
   return (
     <IonList>
@@ -13,13 +14,11 @@ const Books: React.FC = () => {
         <IonItemSliding key={book.title}>
           <IonItem>
             <IonLabel>{book.title}</IonLabel>
-            {book.isFavorite && <IonIcon icon={star} slot="end" />}
+            <IsFavoriteIcon book={book} />
             <IonIcon icon={book.readDate ? bookIcon : bookOutline} slot="end" />
           </IonItem>
           <IonItemOptions>
-            <IonItemOption onClick={() => addToFavorite(book)}>
-              Favorite
-            </IonItemOption>
+            <FavoriteButton book={book} />
           </IonItemOptions>
         </IonItemSliding>
       ))}

@@ -8,5 +8,5 @@ import { IBook } from '../Book';
 export interface IBookService {
   saveBook(book: IBook): Promise<void>;
   getAll(): Promise<IBook[]>;
-  addToFavorite(book: IBook): Promise<void>;
+  switchFavorite(book: IBook): Promise<void>;
 }
