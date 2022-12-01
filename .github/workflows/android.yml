@@ -42,4 +42,4 @@ jobs:
       - name: Grant execute permission for gradle
         run: chmod +x ./gradlew
       - name: Execute Gradle build
-        run: ./gradlew build
+        run: /usr/local/lib/android/sdk/extras/google/google_play_services/samples/unified/ActivityDemo/gradlew build
