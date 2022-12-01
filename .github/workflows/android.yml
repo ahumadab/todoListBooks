@@ -23,7 +23,7 @@ jobs:
       - name: Ionic build
         run: npm run ionBuild
       - name: Ionic add android
-      - run: npm run ionAdd:android
+        run: npm run ionAdd:android
   build:
     runs-on: ubuntu-latest
     steps:
