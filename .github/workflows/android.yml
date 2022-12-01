@@ -1,0 +1,41 @@
+name: Android CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  jobs:
+    install:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [18.x]
+      steps:
+        - uses: actions/checkout@v3
+        - name: Setup Node.js environment v${{ matrix.node-version }}
+          uses: actions/setup-node@v3.5.1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Installing node dependencies
+          run: npm install
+        - name: Ionic build
+          run: npm run ionBuild
+        - name: Ionic add android
+        - run: npm run ionAdd:android
+
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: set up JDK 11
+          uses: actions/setup-java@v3
+          with:
+            java-version: "11"
+            distribution: "temurin"
+            cache: gradle
+
+        - name: Grant execute permission for gradlew
+          run: chmod +x gradlew
+        - name: Build with Gradle
+          run: ./gradlew android
