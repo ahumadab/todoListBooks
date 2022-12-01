@@ -18,6 +18,7 @@ import { BookServiceProvider } from './contexts';
 import { Create } from './pages/Create';
 import { Favorites } from './pages/Favorites';
 import { Home } from './pages/Home';
+import { Update } from './pages/Update';
 
 /* Core CSS required for Ionic components to work properly */
 /* Basic CSS for apps built with Ionic */
@@ -38,6 +39,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/favorites">
             <Favorites />
+          </Route>
+          <Route exact path="/update">
+            <Update />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />

@@ -11,4 +11,5 @@ export interface IBookService {
   switchFavorite(book: IBook): Promise<void>;
   switchRead(book: IBook): Promise<void>;
   delete(book: IBook): Promise<void>;
+  update(book: IBook): Promise<void>;
 }

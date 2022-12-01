@@ -14,6 +14,7 @@ export interface IuseBookService {
   switchFavorite: (book: IBook) => Promise<void>;
   switchRead: (book: IBook) => Promise<void>;
   deleteBook: (book: IBook) => Promise<void>;
+  updateBook: (book: IBook) => Promise<void>;
 }
 
 const useBookService = (): IuseBookService => {
@@ -45,6 +46,17 @@ const useBookService = (): IuseBookService => {
     }
   };
 
+  const updateBook = async (book: IBook) => {
+    const bookIndex: number = books.findIndex(
+      (bookInState) => bookInState.id === book.id
+    );
+    if (bookIndex !== -1) {
+      await bookService.update(book);
+      books[bookIndex] = book;
+      setBooksState([...books]);
+    }
+  };
+
   const switchFavorite = async (book: IBook) => {
     await bookService.switchFavorite(book);
     const newBooks = books.map((bookInState) => {
@@ -72,6 +84,7 @@ const useBookService = (): IuseBookService => {
     switchFavorite,
     switchRead,
     deleteBook,
+    updateBook,
   };
 };
 

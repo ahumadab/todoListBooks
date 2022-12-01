@@ -10,7 +10,7 @@ const LongPressable: React.FC<PropsWithChildren<LongPressableProps>> = ({
   onLongPress,
   children,
 }) => {
-  const backspaceLongPress = useLongPress(onLongPress, 300);
+  const backspaceLongPress = useLongPress(onLongPress, 1000);
 
   return <div {...backspaceLongPress}>{children}</div>;
 };
