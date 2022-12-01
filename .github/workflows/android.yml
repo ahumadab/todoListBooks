@@ -29,17 +29,18 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.jdk-version }}
-          distribution: "temurin"
-          cache: gradle
-      # - name: Setup Gradle
-      #   uses: gradle/gradle-build-action@v2
-      #   with:
-      #     gradle-version: "7.6"
-      # - name: Finding gradle
-      #   run: find / -type f -name "gradlew"
+          distribution: "adopt"
+          cache: "gradle"
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: "android"
+          gradle-version: "7.6"
       - name: Echoing ls
         run: ls -a
       # - name: Grant execute permission for gradle
       #   run: chmod +x ./gradlew
       - name: Execute Gradle build
-        run: /usr/local/lib/android/sdk/extras/google/google_play_services/samples/unified/ActivityDemo/gradlew android
+        run: ./gradlew android
