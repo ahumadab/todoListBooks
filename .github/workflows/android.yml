@@ -7,11 +7,12 @@ on:
     branches:
       - "main"
 jobs:
-  install:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18.x]
+        jdk-version: ["11"]
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js environment v${{ matrix.node-version }}
@@ -24,17 +25,12 @@ jobs:
         run: npm run ionBuild
       - name: Ionic add android
         run: npm run ionAdd:android
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 11
+      - name: set up JDK ${{ matrix.jdk-version }}
         uses: actions/setup-java@v3
         with:
-          java-version: "11"
+          java-version: ${{ matrix.jdk-version }}
           distribution: "temurin"
           cache: gradle
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
